@@ -50,6 +50,7 @@ func (uc DogparkController) GetDogpark(w http.ResponseWriter, r *http.Request, p
 	id := strings.TrimPrefix(r.URL.Path, "/dogpark/")
 
 	for i := range Dogparks {
+
 		if Dogparks[i].Id == id {
 			// Found!
 			u = Dogparks[i]
@@ -94,6 +95,15 @@ func (uc DogparkController) CreateDogpark(w http.ResponseWriter, r *http.Request
 // RemoveDogpark removes an existing user resource - not implemented
 func (uc DogparkController) RemoveDogpark(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	// TODO: only write status for now
+	id := strings.TrimPrefix(r.URL.Path, "/dogpark/")
+	for i := range Dogparks {
+		fmt.Printf("%d",i)
+		if Dogparks[i].Id == id {
+			Dogparks = append(Dogparks[:i], Dogparks[i+1:]...)
+		}
+	}
+
+
 	w.WriteHeader(200)
 }
 
